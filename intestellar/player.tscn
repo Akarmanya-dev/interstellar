@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://cmile0dknrkcl"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_q3sm1"]
+[ext_resource type="Texture2D" uid="uid://dj7kbnmou3yem" path="res://art/intes/international-space-station.svg" id="2_qynii"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l3wvd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qynii")
+}],
+"loop": true,
+"name": &"up",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qynii")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fiabp"]
+radius = 35.0
+height = 72.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource("1_q3sm1")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+sprite_frames = SubResource("SpriteFrames_l3wvd")
+animation = &"up"
+speed_scale = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_fiabp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
